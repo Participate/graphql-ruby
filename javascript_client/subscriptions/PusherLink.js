@@ -81,6 +81,10 @@ class PusherLink extends ApolloLink {
               observer.next(result)
             }
           })
+
+          // Pass data to future observers even if it's a subscription
+          // (Fixes load of initial data via ruby #subscribe method)
+          observer.next(data)
         }
         else {
           // This isn't a subscription,
